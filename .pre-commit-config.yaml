@@ -1,0 +1,19 @@
+repos:
+-   repo: https://github.com/psf/black
+    rev: '23.1.0'
+    hooks:
+    -   id: black
+        args: [--config=pyproject.toml]
+
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 'v4.4.0'
+    hooks:
+    -   id: trailing-whitespace
+
+-   repo: local
+    hooks:
+    -   id: unittest
+        name: run unit tests
+        language: system
+        pass_filenames: false
+        entry: poetry run pytest -v
