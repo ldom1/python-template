@@ -1,9 +1,9 @@
+.. _python_api_reference:
+
 Python API Reference
 ********************
 
-   :Release: |release|
-
 .. toctree::
-   :titlesonly:
+   :maxdepth: 1
 
    example

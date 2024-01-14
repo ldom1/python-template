@@ -6,15 +6,45 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
+import datetime
 import os
 import sys
-import datetime
 from pathlib import Path
-
 
 sys.path.insert(0, os.path.abspath("../../"))
 
+from inspect import getsourcefile
+
 import python_template
+
+# Get path to directory containing this file, conf.py.
+DOCS_DIRECTORY = os.path.dirname(os.path.abspath(getsourcefile(lambda: 0)))
+
+# Set root logging level to INFO
+import logging as logging_root
+
+logger_root = logging_root.getLogger()
+logger_root.setLevel(logging_root.INFO)
+
+
+def ensure_pandoc_installed(_):
+    import pypandoc
+
+    # Download pandoc if necessary. If pandoc is already installed and on
+    # the PATH, the installed version will be used. Otherwise, we will
+    # download a copy of pandoc into docs/bin/ and add that to our PATH.
+    pandoc_dir = os.path.join(DOCS_DIRECTORY, "bin")
+    # Add dir containing pandoc binary to the PATH environment variable
+    if pandoc_dir not in os.environ["PATH"].split(os.pathsep):
+        os.environ["PATH"] += os.pathsep + pandoc_dir
+    pypandoc.ensure_pandoc_installed(
+        targetfolder=pandoc_dir,
+        delete_installer=True,
+    )
+
+
+def setup(app):
+    app.connect("builder-inited", ensure_pandoc_installed)
 
 
 # -- Automatically generate JSON schema html pages -----------------------------
@@ -40,12 +70,13 @@ extensions = [
     "sphinx.ext.autosummary",
     "sphinx.ext.autodoc",
     "sphinx.ext.doctest",
-    "sphinx.ext.intersphinx",
+    "nbsphinx",
     "autodocsumm",
     "sphinx.ext.napoleon",
     "sphinx_design",
     "IPython.sphinxext.ipython_directive",
     "IPython.sphinxext.ipython_console_highlighting",
+    "sphinxcontrib.openapi",
 ]
 autodoc_default_options = {
     "autosummary": False,
@@ -77,7 +108,7 @@ pygments_style = "sphinx"
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = "sphinx_rtd_theme"
+html_theme = "pydata_sphinx_theme"
 html_css_files = [
     "css/theme.css",
 ]
@@ -109,3 +140,9 @@ intersphinx_mapping = {
 # If true, the current module name will be prepended to all description
 # unit titles (such as .. function::).
 add_module_names = False
+
+nbsphinx_custom_formats = {
+    ".md": ["jupytext.reads", {"fmt": "mystnb"}],
+}
+
+nbsphinx_execute = os.environ.get("EXECUTE_DOC_NOTEBOOKS", "never")

@@ -1,11 +1,6 @@
 # Python template
 
-This is a template for Python projects develop to facilitate the creation of new projects.
-
-It works based on git branch:
-- main : standard python project
-- project_data: python project with data: includes s3 storage & mongoDB
-- project_api: python project with api: includes s3 storage & mongoDB & FastApi
+This is a template for Python projects develop to facilitate the creation of new projects following the best practices in the Python community.
 
 ## How to use
 

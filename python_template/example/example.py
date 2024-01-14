@@ -1,7 +1,9 @@
+import python_template.config as cf
+
+
 class Example:
     def __init__(self):
-        self.name = "python-project-template"
+        self.name = cf.PROJECT_NAME
 
     def hello(self):
-        print(f"Hello, {self.name}!")
         return f"Hello, {self.name}!"

@@ -1,0 +1,86 @@
+name: Python template
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+
+permissions:
+  contents: read
+
+env:
+  POETRY_VERSION: 1.6.1
+  PYTHON_VERSION: 3.10
+
+jobs:
+
+  check-version:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ env.PYTHON_VERSION }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install poetry==${{ env.POETRY_VERSION }}
+        poetry install
+    - name: Check version consistency
+      run: |
+        POETRY_VERSION=$(poetry version -s)
+        INIT_VERSION=$(python -c "from python_template import __version__; print(__version__)")
+        if [ "$POETRY_VERSION" != "$INIT_VERSION" ]; then
+          echo "Version mismatch detected: pyproject.toml ($POETRY_VERSION) vs __init__.py ($INIT_VERSION)"
+          exit 1
+        fi
+
+  linting:
+    needs: check-version
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ env.PYTHON_VERSION }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install poetry==${{ env.POETRY_VERSION }}
+        poetry install
+    - name: Check imports with isort
+      run: poetry run isort . --check-only
+    - name: Lint with flake8
+      run: poetry run flake8 python_template
+    - name: Check format with black
+      run: poetry run black --check python_template
+    - name: Lint with pylint
+      run: poetry run pylint python_template --rcfile=pylintrc -j=0 --fail-under=9.5 --output=pylint-report.txt --output-format=text
+
+  test-and-doc-build:
+    needs: linting
+    runs-on: ubuntu-latest
+    env:
+      MONGO_DB_CLUSTER: ${{ secrets.MONGO_DB_CLUSTER }}
+      MONGO_DB_USER: ${{ secrets.MONGO_DB_USER }}
+      MONGO_DB_PASSWORD: ${{ secrets.MONGO_DB_PASSWORD }}
+      MONGO_DB_DBNAME: ${{ secrets.MONGO_DB_DBNAME }}
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ env.PYTHON_VERSION }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install poetry==${{ env.POETRY_VERSION }}
+        poetry install
+    - name: Test with pytest
+      run: poetry run pytest -v --cov=python_template --doctest-modules
+    - name: Build Documentation
+      run: |
+        export EXECUTE_DOC_NOTEBOOKS="always"
+        poetry run python -m sphinx docs/source docs/build
