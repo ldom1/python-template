@@ -42,6 +42,10 @@ We use also pytest-cov to generate the coverage report.
 
 This template uses [Pre-commit](https://pre-commit.com/) to run some checks before commiting the code. pre-commit is a framework for managing and maintaining multi-language pre-commit hooks. The pre-commit hooks are run in the order given, and if any of them fail, the commit is aborted.
 
+### Github Actions
+
+This template uses [Github Actions](https://docs.github.com/en/actions) to automate the workflow. GitHub Actions makes it easy to automate all your software workflows, now with world-class CI/CD. Build, test, and deploy your code right from GitHub. Make code reviews, branch management, and issue triaging work the way you want.
+
 ### Linting & Formatting
 
 #### Flake8
