@@ -15,9 +15,9 @@ components:
       title: HealthCheck
       type: object
 info:
-  description: Generate ads for your business
-  title: Ad Generator
-  version: 0.0.1
+  description: Base API for python_template.
+  title: python_template
+  version: 0.1.0
 openapi: 3.1.0
 paths:
   /:
