@@ -73,6 +73,7 @@ jobs:
       MONGO_DB_USER: ${{ secrets.MONGO_DB_USER }}
       MONGO_DB_PASSWORD: ${{ secrets.MONGO_DB_PASSWORD }}
       MONGO_DB_DBNAME: ${{ secrets.MONGO_DB_DBNAME }}
+      DOCKER_APP_NAME: python_template
 
     steps:
       - name: Check out code
@@ -84,10 +85,10 @@ jobs:
       - name: Build Docker image and run container
         run: |
           docker build -t python_template .
-          docker run -d --name python_template -p 8000:8000 -e HOST=docker python_template:latest
+          docker run -d --name ${{ env.DOCKER_APP_NAME }} -p 8000:8000 -e HOST=docker python_template:latest
           sleep 5
           docker ps -a
-          wget http://localhost:8000/health
+          wget http://docker:8000/health
 
       - uses: actions/checkout@v3
       - name: Set up Python ${{ env.PYTHON_VERSION }}
@@ -108,3 +109,8 @@ jobs:
         run: |
           export EXECUTE_DOC_NOTEBOOKS="always"
           poetry run python -m sphinx docs/source docs/build
+
+      - name: Cleanup
+        run: |
+          docker stop ${{ env.DOCKER_APP_NAME }}
+          docker rm ${{ env.DOCKER_APP_NAME }}
