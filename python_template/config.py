@@ -11,4 +11,4 @@ IMAGE_FILE_EXTENSIONS = ["jpg", "jpeg", "png"]
 
 # Hosting
 HOST = os.environ.get("HOST", "localhost")
-PORT = os.environ.get("HOST", 8000)
+PORT = os.environ.get("PORT", 8000)
