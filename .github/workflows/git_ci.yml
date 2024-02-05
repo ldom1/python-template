@@ -66,7 +66,7 @@ jobs:
         image: docker:dind
         options: --privileged
         ports:
-          - 8000:8000
+          - 2375:2375
 
     env:
       MONGO_DB_CLUSTER: ${{ secrets.MONGO_DB_CLUSTER }}
@@ -86,10 +86,10 @@ jobs:
       - name: Build Docker image and run container
         run: |
           docker build -t python_template .
-          docker run -d --name ${{ env.DOCKER_APP_NAME }} -p ${{ env.DOCKER_APP_PORT }}:8000 -e HOST=docker -e PORT=${{ env.DOCKER_APP_PORT }} python_template:latest
+          docker run -d --name ${{ env.DOCKER_APP_NAME }} -p ${{ env.DOCKER_APP_PORT }}:8000 -e PORT=${{ env.DOCKER_APP_PORT }} python_template:latest
           sleep 5
           docker ps -a
-          wget http://docker:8000/health
+          wget http://localhost:${{ env.DOCKER_APP_PORT }}/health
 
       - uses: actions/checkout@v3
       - name: Set up Python ${{ env.PYTHON_VERSION }}
