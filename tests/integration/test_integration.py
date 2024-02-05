@@ -13,7 +13,9 @@ class TestOperationSync(unittest.TestCase):
         return super().tearDown()
 
     def test_health(self):
-        url = f"http://{cf.HOST}:{cf.PORT}/health"
+        url = f"http://{cf.PYTHON_TEMPLATE_HOST}:{cf.PYTHON_TEMPLATE_PORT}/health"
+
+        cf.logger.info(f"Testing health endpoint at {url}")
 
         response = requests.request("GET", url, headers={}, data={})
         response_json = response.json()

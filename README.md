@@ -32,7 +32,6 @@ This template uses [Amazon S3](https://aws.amazon.com/s3/) to store the files. A
 
 This template uses [Sphinx](https://www.sphinx-doc.org/en/master/) to generate the documentation. Sphinx is a tool that makes it easy to create intelligent and beautiful documentation, written by Georg Brandl and licensed under the BSD license.
 
-
 ### Testing
 
 #### Pytest
@@ -56,6 +55,10 @@ This template uses [Pre-commit](https://pre-commit.com/) to run some checks befo
 ### Github Actions
 
 This template uses [Github Actions](https://docs.github.com/en/actions) to automate the workflow. GitHub Actions makes it easy to automate all your software workflows, now with world-class CI/CD. Build, test, and deploy your code right from GitHub. Make code reviews, branch management, and issue triaging work the way you want.
+
+### Logging
+
+This template uses [Loguru](https://loguru.readthedocs.io/en/stable/) to log the messages. Loguru is a library which aims to bring enjoyable logging in Python. By adding a simple and powerful configuration, it allows to have a more human-friendly logging.
 
 ### Linting & Formatting
 

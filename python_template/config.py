@@ -1,14 +1,14 @@
 import os
 
-import structlog
+from loguru import logger
 
 # Logger
-logger = structlog.get_logger()
+logger = logger.opt(colors=True)
 
 # Global variables
 PROJECT_NAME = "python_template"
 IMAGE_FILE_EXTENSIONS = ["jpg", "jpeg", "png"]
 
 # Hosting
-HOST = os.environ.get("HOST", "localhost")
-PORT = os.environ.get("PORT", 8000)
+PYTHON_TEMPLATE_HOST = os.environ.get("PYTHON_TEMPLATE_HOST", "localhost")
+PYTHON_TEMPLATE_PORT = os.environ.get("PYTHON_TEMPLATE_PORT", 8000)

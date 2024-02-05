@@ -74,7 +74,7 @@ jobs:
       MONGO_DB_PASSWORD: ${{ secrets.MONGO_DB_PASSWORD }}
       MONGO_DB_DBNAME: ${{ secrets.MONGO_DB_DBNAME }}
       DOCKER_APP_NAME: python_template
-      DOCKER_APP_PORT: 8004
+      DOCKER_APP_PORT: 8000
 
     steps:
       - name: Check out code
@@ -86,7 +86,7 @@ jobs:
       - name: Build Docker image and run container
         run: |
           docker build -t python_template .
-          docker run -d --name ${{ env.DOCKER_APP_NAME }} -p ${{ env.DOCKER_APP_PORT }}:8000 -e PORT=${{ env.DOCKER_APP_PORT }} python_template:latest
+          docker run -d --name ${{ env.DOCKER_APP_NAME }} -p ${{ env.DOCKER_APP_PORT }}:8000 -e PYTHON_TEMPLATE_PORT=${{ env.DOCKER_APP_PORT }} python_template:latest
           sleep 5
           docker ps -a
           wget http://localhost:${{ env.DOCKER_APP_PORT }}/health
