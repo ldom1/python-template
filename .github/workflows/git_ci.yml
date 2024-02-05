@@ -58,9 +58,16 @@ jobs:
     - name: Lint with pylint
       run: poetry run pylint python_template --rcfile=pylintrc -j=0 --fail-under=9.5 --output=pylint-report.txt --output-format=text
 
-  test-and-doc-build:
+  test-and-build-doc:
     needs: linting
     runs-on: ubuntu-latest
+    services:
+      docker:
+        image: docker:dind
+        options: --privileged
+        ports:
+          - 8000:8000
+
     env:
       MONGO_DB_CLUSTER: ${{ secrets.MONGO_DB_CLUSTER }}
       MONGO_DB_USER: ${{ secrets.MONGO_DB_USER }}
@@ -68,19 +75,36 @@ jobs:
       MONGO_DB_DBNAME: ${{ secrets.MONGO_DB_DBNAME }}
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python ${{ env.PYTHON_VERSION }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ env.PYTHON_VERSION }}
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install poetry==${{ env.POETRY_VERSION }}
-        poetry install
-    - name: Test with pytest
-      run: poetry run pytest -v --cov=python_template --doctest-modules
-    - name: Build Documentation
-      run: |
-        export EXECUTE_DOC_NOTEBOOKS="always"
-        poetry run python -m sphinx docs/source docs/build
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build Docker image and run container
+        run: |
+          docker build -t python_template .
+          docker run -d --name python_template -p 8000:8000 -e HOST=docker python_template:latest
+          sleep 5
+          docker ps -a
+          wget http://localhost:8000/health
+
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install poetry==${{ env.POETRY_VERSION }}
+          poetry install
+
+      - name: Test with pytest
+        run: poetry run pytest -v --cov=python_template --doctest-modules
+
+      - name: Build Documentation
+        run: |
+          export EXECUTE_DOC_NOTEBOOKS="always"
+          poetry run python -m sphinx docs/source docs/build

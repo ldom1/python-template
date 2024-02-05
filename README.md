@@ -43,6 +43,12 @@ We use also pytest-cov to generate the coverage report.
 
 #### Docker in Docker for integration testing
 
+This template uses [Docker in Docker](https://www.docker.com/blog/docker-can-now-run-within-docker/) to run the integration tests. Docker can now run within Docker. This is a feature that allows you to run Docker containers as part of your Docker build CI/CD pipeline. See section [Github Actions](#github-actions) for more details.
+
+Indeed, if you run the tests/integration, we need to have the FastAPI server running. We can use Docker to run the FastAPI server in a container and then run the tests in another container, the github action runner.
+
+You can see the configuration in the file `.github/workflows/git_ci.yml`.
+
 ### Pre-commit
 
 This template uses [Pre-commit](https://pre-commit.com/) to run some checks before commiting the code. pre-commit is a framework for managing and maintaining multi-language pre-commit hooks. The pre-commit hooks are run in the order given, and if any of them fail, the commit is aborted.
@@ -131,5 +137,6 @@ This template is partely based on the following articles:
 - [Pytest In Practice: Fundamentals of Python Testing Techniques](https://python.plainenglish.io/pytest-in-practice-fundamentals-of-python-testing-techniques-69f299aef09e)
 - [🐍 Python Backend Project Advanced Setup (FastAPI Example)](https://python.plainenglish.io/python-backend-project-advanced-setup-fastapi-example-7b7e73a52aec)
 - [4 Tools to Add to Your Python Project Before Shipping to Production](https://levelup.gitconnected.com/4-tools-to-add-to-your-python-project-before-shipping-to-production-c324f2fb8444)
+- [Blazing fast Python Docker builds with Poetry](https://medium.com/@albertazzir/blazing-fast-python-docker-builds-with-poetry-a78a66f5aed0)
 
 NB: Congratulations to the authors of the articles above for the quality of their work.

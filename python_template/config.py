@@ -1,5 +1,6 @@
-import structlog
 import os
+
+import structlog
 
 # Logger
 logger = structlog.get_logger()
@@ -11,4 +12,3 @@ IMAGE_FILE_EXTENSIONS = ["jpg", "jpeg", "png"]
 # Hosting
 HOST = os.environ.get("HOST", "localhost")
 PORT = os.environ.get("HOST", 8000)
-
