@@ -32,11 +32,16 @@ This template uses [Amazon S3](https://aws.amazon.com/s3/) to store the files. A
 
 This template uses [Sphinx](https://www.sphinx-doc.org/en/master/) to generate the documentation. Sphinx is a tool that makes it easy to create intelligent and beautiful documentation, written by Georg Brandl and licensed under the BSD license.
 
-### Pytest
+
+### Testing
+
+#### Pytest
 
 This template uses [Pytest](https://docs.pytest.org/en/stable/) to test the code. The pytest framework makes it easy to write small tests, yet scales to support complex functional testing for applications and libraries.
 
 We use also pytest-cov to generate the coverage report.
+
+#### Docker in Docker for integration testing
 
 ### Pre-commit
 
@@ -63,6 +68,7 @@ This template uses [Isort](https://pycqa.github.io/isort/) to sort the imports. 
 #### Pylint
 
 This template uses [Pylint](https://www.pylint.org/) to lint the code. Pylint is a tool that checks for errors in Python code, tries to enforce a coding standard and looks for code smells.
+
 
 ## II - How to use
 
