@@ -16,6 +16,10 @@ This template can be used as a starting point for new projects.
 
 This template uses [FAST API](https://fastapi.tiangolo.com/) to create the API. It is a modern, fast (high-performance), web framework for building APIs with Python 3.6+ based on standard Python type hints.
 
+### Docker
+
+This template uses [Docker](https://www.docker.com/) to containerize the application. Docker is a set of platform as a service products that use OS-level virtualization to deliver software in packages called containers.
+
 ### Poetry
 
 This template uses [Poetry](https://python-poetry.org/) to manage the dependencies. Poetry is a tool for dependency management and packaging in Python. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you.

@@ -5,7 +5,6 @@ import uuid
 from typing import Dict, List
 
 import boto3
-import structlog
 from dotenv import find_dotenv, load_dotenv
 from PIL import Image
 
@@ -86,8 +85,6 @@ class S3Storage:
         :param prefix: Prefix to list the files from (e.g. file_uploaded/date=2020-01-01)
         :return: List of files in the prefix
         """
-        structlog.contextvars.bind_contextvars(function_name="list_files_in_prefix")
-
         cf.logger.info(
             f"Listing files in prefix {prefix} from S3 bucket {self.bucket_name}, in region {self.aws_region}"
         )
@@ -105,8 +102,6 @@ class S3Storage:
         :param prefix: Prefix to list the files from (e.g. file_uploaded/date=2020-01-01)
         :return: List of dictionaries with the prefix and filename
         """
-        structlog.contextvars.bind_contextvars(function_name="list_files_in_prefix")
-
         cf.logger.info(
             f"Listing files in prefix {prefix} from S3 bucket {self.bucket_name}, in region {self.aws_region}"
         )
@@ -139,8 +134,6 @@ class S3Storage:
 
         :return: Dictionary with the prefix, key, filename and upload_at
         """
-        structlog.contextvars.bind_contextvars(function_name="upload_file_to_s3")
-
         datetime_today = datetime.date.today()
 
         if not filename:
@@ -177,8 +170,6 @@ class S3Storage:
 
         :return: PIL Image object
         """
-        structlog.contextvars.bind_contextvars(function_name="read_image_from_s3")
-
         cf.logger.info(
             f"Getting file {filename} from S3 bucket {self.bucket_name}, in region {self.aws_region}"
         )
