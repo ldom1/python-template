@@ -14,8 +14,6 @@ def client():
 
 
 # Test the root endpoint
-
-
 def test_root(client):
     """
     Test the root endpoint
