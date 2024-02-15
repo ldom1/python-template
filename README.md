@@ -32,7 +32,6 @@ This template uses [Amazon S3](https://aws.amazon.com/s3/) to store the files. A
 
 This template uses [Sphinx](https://www.sphinx-doc.org/en/master/) to generate the documentation. Sphinx is a tool that makes it easy to create intelligent and beautiful documentation, written by Georg Brandl and licensed under the BSD license.
 
-
 ### Testing
 
 #### Pytest
