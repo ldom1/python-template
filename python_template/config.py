@@ -4,6 +4,10 @@ from loguru import logger
 
 # Logger
 logger = logger.opt(colors=True)
+logger.add(
+    "logs/{time:YYYY-MM-DD}.log",
+    level="INFO",
+)
 
 # Global variables
 PROJECT_NAME = "python_template"
