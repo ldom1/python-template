@@ -1,6 +1,8 @@
 from fastapi import APIRouter, status
 from pydantic import BaseModel
 
+import python_template.config as cfg
+
 router = APIRouter()
 
 
@@ -29,4 +31,5 @@ def get_health() -> HealthCheck:
     Returns:
         HealthCheck: Returns a JSON response with the health status
     """
+    cfg.logger
     return HealthCheck(status="OK", status_code=status.HTTP_200_OK)

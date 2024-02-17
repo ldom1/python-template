@@ -1,39 +1,62 @@
+/* Contenu principal */
 .bd-content {
   flex-grow: 1;
   max-width: 100%;
 }
+
+/* En-tête */
 .bd-header {
   font-size: 15px;
   text-align: center;
+  background-color: #FFFFFF; /* Blanc pour l'arrière-plan de l'en-tête */
+  color: #02093B; /* Bleu foncé pour le texte */
 }
+
+/* Barre latérale principale */
 .bd-sidebar-primary {
   width: 15%;
+  background-color: #F0F8FF; /* Bleu très clair pour l'arrière-plan de la barre latérale */
 }
+
+/* Largeur de la page */
 .bd-page-width {
   max-width: 95rem;
 }
+
+/* Logo dans l'en-tête */
 .bd-header .logo {
-  height: 100%
+  height: 100%;
 }
 
+/* Ajustements pour les grandes écrans */
 .col-lg-3 {
   width: 13%;
 }
 
+/* Titres */
 h1 {
-  color: #02093B;
+  color: #02093B; /* Bleu très foncé */
 }
 
 h2 {
-  color: #203c6c; /* !Artelys dark blue */
+  color: #203c6c; /* Bleu Artelys foncé */
 }
 
+/* Liens */
 a {
   text-decoration: none;
+  color: #1E90FF; /* Bleu Dodger pour les liens */
 }
 
+a:hover {
+  color: #4169E1; /* Bleu royal pour le survol des liens */
+}
+
+/* Cartes d'introduction */
 .intro-card {
   padding: 30px 20px 20px 20px;
+  background-color: #FFFFFF; /* Blanc pour l'arrière-plan des cartes */
+  border: 1px solid #E0E0E0; /* Bordure subtile pour les cartes */
 }
 
 .intro-card .sd-card-img-top {
@@ -44,29 +67,30 @@ a {
 }
 
 .intro-card .sd-card-title {
-  color: #2C0A28; /* !darkpurple */
-  margin-top: 10px;
-  vertical-align: top;
+  color: #02093B; /* Bleu très foncé pour le titre des cartes */
   font-size: var(--pst-font-size-h5);
   padding: 1rem 0rem 0.5rem 0rem;
 }
 
 .intro-card .sd-card-footer {
   border: none !important;
+  background-color: #F0F8FF; /* Bleu très clair pour le pied de page des cartes */
 }
 
 .intro-card .sd-card-footer p.sd-card-text {
   max-width: 250px;
   margin-left: auto;
   margin-right: auto;
+  color: #585858; /* Gris foncé pour le texte */
 }
 
+/* Boutons secondaires dans les cartes */
 .intro-card .sd-btn-secondary {
-  background-color: #563B53 !important;
-  border-color: #6c757d !important;
+  background-color: #ADD8E6 !important; /* Bleu clair */
+  border-color: #B0C4DE !important; /* Bleu acier clair */
 }
 
 .intro-card .sd-btn-secondary:hover {
-  background-color: #2C0A28 !important;
-  border-color: #545b62 !important;
+  background-color: #87CEFA !important; /* Bleu ciel */
+  border-color: #7B68EE !important; /* Bleu moyen */
 }

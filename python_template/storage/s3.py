@@ -8,7 +8,7 @@ import boto3
 from dotenv import find_dotenv, load_dotenv
 from PIL import Image
 
-import python_template.config as cf
+import python_template.config as cfg
 
 load_dotenv(find_dotenv())
 
@@ -85,7 +85,7 @@ class S3Storage:
         :param prefix: Prefix to list the files from (e.g. file_uploaded/date=2020-01-01)
         :return: List of files in the prefix
         """
-        cf.logger.info(
+        cfg.logger.info(
             f"Listing files in prefix {prefix} from S3 bucket {self.bucket_name}, in region {self.aws_region}"
         )
 
@@ -102,7 +102,7 @@ class S3Storage:
         :param prefix: Prefix to list the files from (e.g. file_uploaded/date=2020-01-01)
         :return: List of dictionaries with the prefix and filename
         """
-        cf.logger.info(
+        cfg.logger.info(
             f"Listing files in prefix {prefix} from S3 bucket {self.bucket_name}, in region {self.aws_region}"
         )
 
@@ -147,7 +147,7 @@ class S3Storage:
 
         key = f"{prefix}/{filename}"
 
-        cf.logger.info(
+        cfg.logger.info(
             f"Uploading file {filename} to S3 bucket {self.bucket_name}, in region {self.aws_region}"
         )
 
@@ -166,17 +166,17 @@ class S3Storage:
 
         :param prefix: Prefix to read the file from
         :param filename: Filename to read the file from
-        :param file_extension: File extension (allowed extensions are in cf.IMAGE_FILE_EXTENSIONS)
+        :param file_extension: File extension (allowed extensions are in cfg.IMAGE_FILE_EXTENSIONS)
 
         :return: PIL Image object
         """
-        cf.logger.info(
+        cfg.logger.info(
             f"Getting file {filename} from S3 bucket {self.bucket_name}, in region {self.aws_region}"
         )
 
-        if file_extension not in cf.IMAGE_FILE_EXTENSIONS:
+        if file_extension not in cfg.IMAGE_FILE_EXTENSIONS:
             raise Exception(
-                f"File extension {file_extension} is not supported. Supported file extensions are {cf.IMAGE_FILE_EXTENSIONS}"
+                f"File extension {file_extension} is not supported. Supported file extensions are {cfg.IMAGE_FILE_EXTENSIONS}"
             )
 
         # Get the file from S3

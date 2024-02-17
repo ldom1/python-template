@@ -9,7 +9,7 @@ Purpose
 
 The goal of this documentation is to provide a quick overview of the Python template.
 
-.. grid:: 3 3 3 3
+.. grid:: 2 2 2 2
     :class-container: sd-text-center
 
     .. grid-item-card::  Usages
@@ -68,7 +68,8 @@ The goal of this documentation is to provide a quick overview of the Python temp
    :maxdepth: 2
    :caption: Resources
 
-   Medium article <https://medium.com/@sylvaindurand_57962/creating-a-documentation-for-your-python-package-3485fbb13b69>
+   Python tempalte article <https://python.plainenglish.io/automated-project-documentation-python-f880f19ad13b>
+   Medium article <https://python.plainenglish.io/automated-project-documentation-python-f880f19ad13b>
    MongoDB Manager <https://pypi.org/project/mongodb-python-manager/>
 
 

@@ -47,9 +47,6 @@ ENV VIRTUAL_ENV=/app/.venv \
 # Copy the virtual environment from the builder stage.
 COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 
-# Switch to the non-privileged user to run the application.
-USER appuser
-
 WORKDIR /app
 
 # Copy the source code into the container.
@@ -57,8 +54,17 @@ COPY python_template/ /app/python_template
 COPY tests /app/tests
 COPY docs /app/docs
 
+# Make log directory with appuser privilege
+RUN mkdir /app/logs/ && \
+    chown appuser:appuser /app/logs/ && \
+    chmod 755 /app/logs/
+
+
 # Expose the port that the application listens on.
 EXPOSE 8000
+
+# Switch to the non-privileged user to run the application.
+USER appuser
 
 # Run the application.
 ENTRYPOINT ["uvicorn", "python_template.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
