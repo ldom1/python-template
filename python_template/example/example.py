@@ -7,19 +7,8 @@ class Example:
     This class serves as a simple demonstration of how to utilize a global configuration
     within a Python class. It showcases the use of global configuration parameters,
     such as the project name, and how these can be employed within specific class methods.
-
-    Attributes:
-        name (str): The name of the project retrieved from the global configuration.
     """
-
-    def __init__(self):
-        """
-        Initializes the Example class.
-
-        Upon initialization, the `name` attribute is set using the `PROJECT_NAME` value
-        from the global configuration module of the Python template project.
-        """
-        self.name = cfg.PROJECT_NAME
+    name = cfg.PROJECT_NAME
 
     def hello(self):
         """
