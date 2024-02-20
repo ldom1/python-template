@@ -1,10 +1,10 @@
 import unittest
 
-import python_template.config as cf
+import python_template.config as cfg
 from python_template.example.example import Example
 
 
 class TestExample(unittest.TestCase):
     def test_hello(self):
         example = Example()
-        assert example.hello() == f"Hello, {cf.PROJECT_NAME}!"
+        assert example.hello() == f"Hello, {cfg.PROJECT_NAME}!"

@@ -2,7 +2,7 @@ import unittest
 
 import requests
 
-import python_template.config as cf
+import python_template.config as cfg
 
 
 class TestOperationSync(unittest.TestCase):
@@ -13,9 +13,9 @@ class TestOperationSync(unittest.TestCase):
         return super().tearDown()
 
     def test_health(self):
-        url = f"http://{cf.PYTHON_TEMPLATE_HOST}:{cf.PYTHON_TEMPLATE_PORT}/health"
+        url = f"http://{cfg.PYTHON_TEMPLATE_HOST}:{cfg.PYTHON_TEMPLATE_PORT}/health"
 
-        cf.logger.info(f"Testing health endpoint at {url}")
+        cfg.logger.info(f"Testing health endpoint at {url}")
 
         response = requests.request("GET", url, headers={}, data={})
         response_json = response.json()
