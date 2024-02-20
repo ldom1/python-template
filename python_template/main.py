@@ -32,6 +32,7 @@ async def main_route() -> JSONResponse:
         },
     )
 
+
 @app.get(
     "/version",
     description=f"Version route of the {cfg.PROJECT_NAME} API.",
