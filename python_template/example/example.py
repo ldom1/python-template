@@ -1,5 +1,6 @@
 import python_template.config as cfg
 
+
 class Example:
     """
     Example class for the Python template project.
@@ -8,6 +9,7 @@ class Example:
     within a Python class. It showcases the use of global configuration parameters,
     such as the project name, and how these can be employed within specific class methods.
     """
+
     name = cfg.PROJECT_NAME
 
     def hello(self):

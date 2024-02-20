@@ -13,7 +13,7 @@ env:
 
 jobs:
 
-  check-version:
+  env-setup:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -21,13 +21,15 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: ${{ env.PYTHON_VERSION }}
-    - name: Check Python version
-      run: python --version
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install poetry==${{ env.POETRY_VERSION }}
         poetry install
+
+  check-version:
+    runs-on: ubuntu-latest
+    steps:
     - name: Check version consistency
       run: |
         POETRY_VERSION=$(poetry version -s)
