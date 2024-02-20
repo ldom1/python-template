@@ -31,3 +31,19 @@ async def main_route() -> JSONResponse:
             "version": python_template.__version__,
         },
     )
+
+@app.get(
+    "/version",
+    description=f"Version route of the {cf.PROJECT_NAME} API.",
+    tags=["base"],
+)
+async def version_route() -> JSONResponse:
+    """
+    Version route
+    """
+    return JSONResponse(
+        status_code=status.HTTP_200_OK,
+        content={
+            "version": python_template.__version__,
+        },
+    )
