@@ -5,7 +5,7 @@ import urllib
 import structlog
 from PIL import Image
 
-import python_template.config as cf
+import python_template.config as cfg
 
 
 def download_from_url(filename, url) -> str:
@@ -36,7 +36,7 @@ def load_image_from_url(url, file_extension: str) -> io.BytesIO:
     # Load the image data into memory using PIL
     image = Image.open(io.BytesIO(image_data))
 
-    cf.logger.info(
+    cfg.logger.info(
         f"""
         Image loaded:
         - Image mode: {image.mode}

@@ -20,8 +20,6 @@ This template uses [FAST API](https://fastapi.tiangolo.com/) to create the API. 
 
 This template uses [Docker](https://www.docker.com/) to containerize the application. Docker is a set of platform as a service products that use OS-level virtualization to deliver software in packages called containers.
 
-The Dockerfile has been set up using ```docker init``` and ```docker buildx``` to build the image with the multi-platform support.
-
 ### Poetry
 
 This template uses [Poetry](https://python-poetry.org/) to manage the dependencies. Poetry is a tool for dependency management and packaging in Python. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you.

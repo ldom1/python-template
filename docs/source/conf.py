@@ -145,4 +145,4 @@ nbsphinx_custom_formats = {
     ".md": ["jupytext.reads", {"fmt": "mystnb"}],
 }
 
-nbsphinx_execute = os.environ.get("EXECUTE_DOC_NOTEBOOKS", "never")
+nbsphinx_execute = os.environ.get("EXECUTE_DOC_NOTEBOOKS", "always")
